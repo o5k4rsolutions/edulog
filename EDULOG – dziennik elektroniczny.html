@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EDULOG – dziennik elektroniczny</title>
+<link rel="icon" href="https://edulog.pages.dev/content/edulog_logo_favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfbfd;--card:#fff;--tx:#1d1d1f;--mut:#6e6e73;--ln:rgba(0,0,0,.08);--bl:#0a6cff;--bl2:#4aa3ff;--dk:#14233c;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="dark"]{--bg:#fbfbfd}
+*,*::before,*::after{box-sizing:inherit;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--tx);font-family:'Lexend Deca','Legend Deca',-apple-system,'Segoe UI',sans-serif;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.35;z-index:-1;animation:float 18s ease-in-out infinite}
+.b1{width:480px;height:480px;background:#bcdcff;top:-120px;left:-100px}
+.b2{width:420px;height:420px;background:#d9e8ff;top:30%;right:-120px;animation-delay:-6s}
+.b3{width:380px;height:380px;background:#cfe4ff;bottom:-100px;left:30%;animation-delay:-12s}
+@keyframes float{50%{transform:translate(40px,50px) scale(1.12)}}
+header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;background:rgba(251,251,253,.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--ln);animation:down .8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes down{from{transform:translateY(-100%);opacity:0}}
+nav{max-width:1080px;margin:auto;height:56px;padding:0 22px;display:flex;align-items:center;justify-content:space-between}
+nav img{height:30px;display:block}
+.links{display:flex;gap:28px;font-size:13px;color:#424245}
+.links a{position:relative;transition:color .2s}
+.links a::after{content:"";position:absolute;left:0;bottom:-4px;height:2px;width:0;background:var(--bl);transition:width .3s}
+.links a:hover{color:var(--tx)}.links a:hover::after{width:100%}
+.btn{display:inline-block;background:var(--bl);color:#fff;border-radius:980px;padding:8px 18px;font-size:13px;font-weight:500;transition:transform .25s,box-shadow .25s,background .2s}
+.btn:hover{transform:scale(1.05);background:#0057d9;box-shadow:0 8px 24px rgba(10,108,255,.35)}
+.btn.big{padding:14px 30px;font-size:16px}
+.btn.ghost{background:transparent;color:var(--bl);box-shadow:none}
+.btn.ghost:hover{background:rgba(10,108,255,.08)}
+@media(max-width:720px){.links{display:none}}
+.hero{max-width:1080px;margin:auto;padding:150px 22px 60px;text-align:center}
+.pill{display:inline-block;font-size:13px;color:var(--bl);background:rgba(10,108,255,.09);padding:6px 14px;border-radius:980px;margin-bottom:22px;animation:rise .9s .1s both}
+h1{font-size:clamp(40px,8vw,84px);line-height:1.04;font-weight:700;letter-spacing:-.03em;animation:rise .9s .25s both}
+h1 span{background:linear-gradient(100deg,var(--bl),var(--bl2),#7cc0ff,var(--bl));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:grad 6s linear infinite}
+@keyframes grad{to{background-position:300% 0}}
+.sub{font-size:clamp(17px,2.4vw,22px);color:var(--mut);max-width:620px;margin:22px auto 34px;font-weight:300;animation:rise .9s .4s both}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:rise .9s .55s both}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}}
+.mock{margin:64px auto 0;max-width:860px;background:var(--card);border-radius:22px;border:1px solid var(--ln);box-shadow:0 40px 90px rgba(20,35,60,.14);padding:18px;text-align:left;animation:rise 1.1s .7s both,bob 7s 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px)}}
+.dots{display:flex;gap:6px;margin-bottom:14px}.dots i{width:10px;height:10px;border-radius:50%;background:#e5e5ea}
+.dots i:nth-child(1){background:#ff6058}.dots i:nth-child(2){background:#ffbd2e}.dots i:nth-child(3){background:#28c940}
+.grid{display:grid;grid-template-columns:1fr 1.4fr;gap:14px}
+@media(max-width:620px){.grid{grid-template-columns:1fr}}
+.panel{background:#f5f7fb;border-radius:14px;padding:16px}
+.panel h4{font-size:13px;color:var(--mut);font-weight:400;margin-bottom:10px}
+.avg{font-size:46px;font-weight:700;color:var(--bl)}
+.bars{display:flex;align-items:flex-end;gap:8px;height:110px}
+.bars b{flex:1;background:linear-gradient(var(--bl2),var(--bl));border-radius:6px 6px 0 0;height:0;animation:grow 1.2s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(1.2s + var(--i)*.1s)}
+@keyframes grow{to{height:var(--h)}}
+.row{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-bottom:1px solid var(--ln)}
+.row:last-child{border:0}
+.g{font-weight:600;color:var(--bl);background:#fff;border-radius:8px;padding:0 10px}
+section{max-width:1080px;margin:auto;padding:110px 22px 0}
+h2{font-size:clamp(30px,5vw,52px);letter-spacing:-.025em;line-height:1.1;text-align:center;font-weight:600}
+.lead{text-align:center;color:var(--mut);font-size:18px;font-weight:300;margin:14px auto 48px;max-width:560px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.c{background:var(--card);border:1px solid var(--ln);border-radius:24px;padding:30px;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s}
+.c:hover{transform:translateY(-8px);box-shadow:0 24px 50px rgba(20,35,60,.12)}
+.ic{width:54px;height:54px;border-radius:16px;background:#eaf3ff;color:var(--bl);display:grid;place-items:center;margin-bottom:18px;transition:background .4s,color .4s,transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .4s}
+.ic svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ic svg *{stroke-dasharray:60;stroke-dashoffset:0}
+.c:hover .ic{background:linear-gradient(135deg,var(--bl2),var(--bl));background-color:var(--bl);color:#fff;transform:rotate(-8deg) scale(1.12);box-shadow:0 10px 24px rgba(10,108,255,.35)}
+.c:hover .ic svg *{animation:draw .9s ease-out}
+@keyframes draw{from{stroke-dashoffset:60}to{stroke-dashoffset:0}}
+.c h3{transition:color .3s}.c:hover h3{color:var(--bl)}
+.c h3{font-size:19px;font-weight:600;margin-bottom:6px}.c p{color:var(--mut);font-size:15px;font-weight:300}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;text-align:center;background:var(--card);border:1px solid var(--ln);border-radius:28px;padding:44px 20px}
+.stats strong{display:block;font-size:clamp(36px,5vw,56px);font-weight:700;color:var(--dk);letter-spacing:-.02em}
+.stats span{color:var(--mut);font-size:14px}
+.final{text-align:center;background:linear-gradient(135deg,#eaf3ff,#fff);border:1px solid var(--ln);border-radius:32px;padding:70px 22px}
+.final p{color:var(--mut);margin:14px 0 30px;font-weight:300}
+footer{max-width:1080px;margin:80px auto 0;padding:26px 22px 40px;border-top:1px solid var(--ln);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--mut);font-size:12px}
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<header><nav>
+<a href="#top"><img src="https://edulog.pages.dev/content/edulog_logo_ciemne.svg" alt="EDULOG"></a>
+<div class="links"><a href="#funkcje">Funkcje</a><a href="#liczby">Dlaczego EDULOG</a><a href="#start">Zacznij</a></div>
+<a class="btn" href="#start">Zaloguj się</a>
+</nav></header>
+
+<main id="top">
+<div class="hero">
+<div class="pill">Dziennik elektroniczny nowej generacji</div>
+<h1>Szkoła w jednym,<br><span>prostym miejscu.</span></h1>
+<p class="sub">Oceny, frekwencja, plan lekcji i wiadomości. Wszystko czytelne, szybkie i zawsze pod ręką.</p>
+<div class="cta"><a class="btn big" href="#start">Zaloguj się</a><a class="btn big ghost" href="#funkcje">Poznaj funkcje ›</a></div>
+
+<div class="mock" aria-hidden="true">
+<div class="dots"><i></i><i></i><i></i></div>
+<div class="grid">
+<div class="panel"><h4>Średnia ocen</h4><div class="avg" data-count="4.62" data-dec="2">0</div>
+<div class="bars" style="margin-top:14px"><b style="--h:55%;--i:0"></b><b style="--h:70%;--i:1"></b><b style="--h:62%;--i:2"></b><b style="--h:85%;--i:3"></b><b style="--h:78%;--i:4"></b><b style="--h:95%;--i:5"></b></div></div>
+<div class="panel"><h4>Ostatnie oceny</h4>
+<div class="row"><span>Matematyka</span><span class="g">5</span></div>
+<div class="row"><span>Język polski</span><span class="g">4+</span></div>
+<div class="row"><span>Informatyka</span><span class="g">6</span></div>
+<div class="row"><span>Fizyka</span><span class="g">5-</span></div></div>
+</div></div>
+</div>
+
+<section id="funkcje">
+<h2 class="rv">Wszystko, czego potrzebuje szkoła.</h2>
+<p class="lead rv" style="--d:.1s">Projektowany z myślą o uczniach, rodzicach i nauczycielach.</p>
+<div class="cards">
+<div class="c rv"><div class="ic"><svg viewBox="0 0 24 24"><path pathLength="60" d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Oceny na bieżąco</h3><p>Nowe oceny i średnie widoczne od razu po wystawieniu.</p></div>
+<div class="c rv" style="--d:.1s"><div class="ic"><svg viewBox="0 0 24 24"><rect pathLength="60" x="3" y="5" width="18" height="16" rx="3"/><path pathLength="60" d="M3 10h18M8 3v4M16 3v4"/></svg></div><h3>Plan lekcji</h3><p>Zmiany i zastępstwa w czasie rzeczywistym.</p></div>
+<div class="c rv" style="--d:.2s"><div class="ic"><svg viewBox="0 0 24 24"><circle pathLength="60" cx="12" cy="12" r="9"/><path pathLength="60" d="M8 12.5l3 3 5-6"/></svg></div><h3>Frekwencja</h3><p>Obecności i usprawiedliwienia w kilka kliknięć.</p></div>
+<div class="c rv" style="--d:.3s"><div class="ic"><svg viewBox="0 0 24 24"><path pathLength="60" d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z"/></svg></div><h3>Wiadomości</h3><p>Szybki kontakt z nauczycielami i wychowawcą.</p></div>
+<div class="c rv" style="--d:.4s"><div class="ic"><svg viewBox="0 0 24 24"><path pathLength="60" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4"/></svg></div><h3>Sprawdziany</h3><p>Terminarz zadań i testów, żeby nic Cię nie zaskoczyło.</p></div>
+<div class="c rv" style="--d:.5s"><div class="ic"><svg viewBox="0 0 24 24"><path pathLength="60" d="M18 16v-5a6 6 0 1 0-12 0v5l-2 2h16zM10 21h4"/></svg></div><h3>Powiadomienia</h3><p>Ważne informacje trafiają do Ciebie natychmiast.</p></div>
+</div>
+</section>
+
+<section id="liczby">
+<div class="stats rv">
+<div><strong data-count="99.9" data-dec="1" data-suf="%">0</strong><span>dostępności systemu</span></div>
+<div><strong data-count="24" data-suf="/7">0</strong><span>dostęp o każdej porze</span></div>
+<div><strong data-count="3" data-suf=" s">0</strong><span>do zalogowania</span></div>
+<div><strong data-count="100" data-suf="%">0</strong><span>na telefonie i komputerze</span></div>
+</div>
+</section>
+
+<section id="start">
+<div class="final rv">
+<h2>Gotowy na EDULOG?</h2>
+<p>Zaloguj się i zobacz, jak wygląda szkoła bez papierowego chaosu.</p>
+<a class="btn big" href="#top">Zaloguj się</a>
+</div>
+</section>
+</main>
+
+<footer><span>© 2026 EDULOG</span><span>Dziennik elektroniczny</span></footer>
+
+<script>
+(function(){
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+function count(el){var t=parseFloat(el.dataset.count),d=+el.dataset.dec||0,s=el.dataset.suf||'',st=null;
+function f(ts){st=st||ts;var p=Math.min((ts-st)/1800,1),e=1-Math.pow(1-p,4);el.textContent=(t*e).toFixed(d).replace('.',',')+s;if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+var co=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){count(e.target);co.unobserve(e.target)}})},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(function(el){co.observe(el)});
+})();
+</script>
+</body>
+</html>
